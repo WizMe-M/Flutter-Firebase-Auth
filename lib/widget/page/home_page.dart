@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key, required this.email}) : super(key: key);
+  const HomePage({Key? key, this.email}) : super(key: key);
 
-  final String email;
+  final String? email;
+
+  bool get isAnonymous => email == null;
+
+  String get _text =>
+      isAnonymous ? 'You Signed In as Anonymous' : 'Welcome $email';
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +16,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Text(
-            'Welcome $email',
+            _text,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
