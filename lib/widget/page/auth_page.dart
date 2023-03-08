@@ -66,35 +66,54 @@ class _AuthPageState extends State<AuthPage> {
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              DynamicInputWidget(
-                controller: _emailController,
-                prefixIcon: Icons.email,
-                labelText: 'Email',
-                textInputAction: TextInputAction.next,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: DynamicInputWidget(
+                  controller: _emailController,
+                  prefixIcon: Icons.email,
+                  labelText: 'Email',
+                  textInputAction: TextInputAction.next,
+                ),
               ),
-              DynamicInputWidget(
-                controller: _passwordController,
-                labelText: 'Password',
-                prefixIcon: Icons.password,
-                isPasswordField: true,
-                obscureText: isPasswordHidden,
-                toggleObscureCallback: togglePassword,
-                textInputAction: TextInputAction.done,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: DynamicInputWidget(
+                  controller: _passwordController,
+                  labelText: 'Password',
+                  prefixIcon: Icons.password,
+                  isPasswordField: true,
+                  obscureText: isPasswordHidden,
+                  toggleObscureCallback: togglePassword,
+                  textInputAction: TextInputAction.done,
+                ),
               ),
-              ElevatedButton(
-                  onPressed: () => signIn(),
-                  child: const Text('Sign In with Password')),
-              ElevatedButton(
-                  onPressed: () => signInAnon(),
-                  child: const Text('Sign In anonymously')),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: SizedBox(
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed: () => signIn(),
+                    child: const Text('Sign In with Password'),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                    onPressed: () => signInAnon(),
+                    child: const Text('Sign In anonymously')),
+              ),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Don't have an account yet?"),
                   TextButton(
-                      onPressed: () => context.go(AppPage.signUp.path),
-                      child: const Text('Register'))
+                    onPressed: () => context.go(AppPage.signUp.path),
+                    child: const Text('Register'),
+                  )
                 ],
               )
             ],
