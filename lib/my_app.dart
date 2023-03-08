@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth/routing/app_path.dart';
-import 'package:flutter_firebase_auth/widget/page/auth_email_link_page.dart';
-import 'package:flutter_firebase_auth/widget/page/auth_email_password_page.dart';
 import 'package:flutter_firebase_auth/widget/page/auth_page.dart';
 import 'package:flutter_firebase_auth/widget/page/home_page.dart';
 import 'package:flutter_firebase_auth/widget/page/reg_page.dart';
@@ -19,21 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: AppPage.signIn.path,
-        builder: (context, state) => AuthPage(
-          email: state.queryParams['email']!,
-        ),
-      ),
-      GoRoute(
-        path: AppPage.signInWithPassword.path,
-        builder: (context, state) => AuthEmailPasswordPage(
-          email: state.queryParams['email']!,
-        ),
-      ),
-      GoRoute(
-        path: AppPage.signInWithLink.path,
-        builder: (context, state) => AuthEmailLinkPage(
-          email: state.queryParams['email']!,
-        ),
+        builder: (context, state) => const AuthPage(),
       ),
       GoRoute(
         path: AppPage.home.path,
