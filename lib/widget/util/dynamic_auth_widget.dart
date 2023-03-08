@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class DynamicInputWidget extends StatelessWidget {
   const DynamicInputWidget(
       {required this.controller,
-      this.labelText = '',
+      this.labelText,
+      this.hintText,
       this.readonly = false,
       this.isPasswordField = false,
       this.obscureText = false,
@@ -23,7 +24,8 @@ class DynamicInputWidget extends StatelessWidget {
   final FocusNode? focusNode;
   final String? Function(String?)? validator;
   final IconData? prefixIcon;
-  final String labelText;
+  final String? labelText;
+  final String? hintText;
   final TextInputAction? textInputAction;
 
   @override
@@ -34,7 +36,9 @@ class DynamicInputWidget extends StatelessWidget {
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-        label: Text(labelText),
+        label: labelText != null ? Text(labelText!) : null,
+        hintText: hintText,
+        hintStyle: TextStyle(color: Colors.grey[800]),
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
         suffixIcon: isPasswordField
             ? IconButton(
