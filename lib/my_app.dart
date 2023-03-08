@@ -21,9 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: AppPage.home.path,
-        builder: (context, state) => HomePage(
-          email: state.queryParams['email'],
-        ),
+        builder: (context, state) => const HomePage(),
       )
     ],
   );
