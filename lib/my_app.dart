@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final GoRouter _router = GoRouter(
-    initialLocation: AppPage.home.path,
+    initialLocation: AppPage.signIn.path,
     routes: [
       GoRoute(
         path: AppPage.signUp.path,
@@ -19,19 +19,27 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: AppPage.signIn.path,
-        builder: (context, state) => AuthPage(),
+        builder: (context, state) => AuthPage(
+          email: state.queryParams['email']!,
+        ),
       ),
       GoRoute(
         path: AppPage.signInWithPassword.path,
-        builder: (context, state) => const AuthEmailPasswordPage(),
+        builder: (context, state) => AuthEmailPasswordPage(
+          email: state.queryParams['email']!,
+        ),
       ),
       GoRoute(
         path: AppPage.signInWithLink.path,
-        builder: (context, state) => const AuthEmailLinkPage(),
+        builder: (context, state) => AuthEmailLinkPage(
+          email: state.queryParams['email']!,
+        ),
       ),
       GoRoute(
         path: AppPage.home.path,
-        builder: (context, state) => HomePage(email: state.params['email']),
+        builder: (context, state) => HomePage(
+          email: state.queryParams['email'],
+        ),
       )
     ],
   );

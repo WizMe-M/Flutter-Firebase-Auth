@@ -20,7 +20,7 @@ class AuthPage extends StatelessWidget {
               width: 400,
               child: Column(
                 children: [
-                  Expanded(
+                  Flexible(
                     child: DynamicInputWidget(
                       controller: _emailController,
                       prefixIcon: Icons.email,
@@ -28,22 +28,31 @@ class AuthPage extends StatelessWidget {
                       textInputAction: TextInputAction.done,
                     ),
                   ),
-                  Expanded(
+                  Flexible(
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => context.go(Uri(
+                              path: AppPage.signInWithPassword.path,
+                              queryParameters: {'email': _emailController.text},
+                            ).toString()),
                         child: const Text('Sign In with Password')),
                   ),
-                  Expanded(
+                  Flexible(
                     child: ElevatedButton(
                         onPressed: () {},
                         child: const Text('Sign In with Link')),
                   ),
-                  Expanded(
+                  Flexible(
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          var credential =
+                              await FirebaseAuth.instance.signInAnonymously();
+                          if (context.mounted) {
+                            context.go(AppPage.home.path);
+                          }
+                        },
                         child: const Text('Sign In anonymously')),
                   ),
-                  Expanded(
+                  Flexible(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
