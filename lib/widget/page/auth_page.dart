@@ -23,23 +23,36 @@ class _AuthPageState extends State<AuthPage> {
     });
   }
 
+  void onSignInFailed(dynamic error) async {
+    var alert = AlertDialog(
+      title: const Text('Authentication failed'),
+      content: Text(error.toString()),
+    );
+
+    await showDialog(
+      context: context,
+      builder: (context) => alert,
+    );
+  }
+
   void signIn() async {
     var email = _emailController.text;
     var password = _passwordController.text;
-    var uc = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
 
-    debugPrint('auth. #is log in = ${uc.user != null}');
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
 
-    if (context.mounted) {
-      context.go(AppPage.home.path);
+      if (context.mounted) {
+        context.go(AppPage.home.path);
+      }
+    } on FirebaseAuthException catch (e) {
+      onSignInFailed(e.message);
     }
   }
 
   void signInAnon() async {
-    var uc = await FirebaseAuth.instance.signInAnonymously();
-
-    debugPrint('auth. #is log in = ${uc.user != null}');
+    await FirebaseAuth.instance.signInAnonymously();
 
     if (context.mounted) {
       context.go(AppPage.home.path);
